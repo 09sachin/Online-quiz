@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% load quiz_tags %}
+
+{% block title %} {{ quiz.title}} {% endblock %}
+{% block description %} {% trans "Exam Results for" %} {{ quiz.title }} {% endblock %}
+
+{% block content %}
+
+  {% if previous.answers %}
+
+  <p class="muted"><small>{% trans "The previous question" %}:</small></p>
+  <p>{{ previous.previous_question }}</p>
+  <p>Your answer was
+	<strong>
+	  {{ previous.previous_outcome|yesno:"correct,incorrect" }}
+	</strong>
+  </p>
+  {% include 'correct_answer.html' %}
+  <p><strong>{% trans "Explanation" %}:</strong></p>
+  <div class="well " style="background-color: #fcf8e3;">
+    <p>{{ previous.previous_question.explanation }}</p>
+  </div>
+  <hr>
+
+  {% endif %}
+
+  {% if max_score %}
+
+  <div style="margin-top: 50px; background-color: white">
+	<h2>{% trans "Exam results" %}</h2>
+	<p>
+	  <small class="muted">{% trans "Exam title" %}: </small>
+	  <strong>{{ quiz.title }}</strong></p>
+
+	<h1 class="lead">
+	  {% trans "You answered" %} {{ score }} {% trans "questions correctly out of" %} {{ max_score }}, {% trans "giving you" %} {{ percent }} {% trans "percent correct" %}
+	</h1>
+
+	{% if quiz.pass_mark %}
+	<hr>
+        <h1 class="lead">{{ sitting.result_message }}</h1>
+	<hr>
+
+	{% endif %}
+
+
+	{% if user.is_authenticated %}
+
+	  <p>{% trans "The result of this exam will be stored in your progress section so you can review and monitor your progression" %}.</p>
+
+	{% endif %}
+  </div>
+
+
+  {% endif %}
+
+
+  <hr>
+
+  {% if possible %}
+
+  <p class="lead">
+	{% trans "Your session score is" %} {{ session }} {% trans "out of a possible" %} {{ possible }}
+  </p>
+
+  <hr>
+
+  {% endif %}
+
+  {% if questions %}
+
+
+
+  {% endif %}
+
+
+{% endblock %}

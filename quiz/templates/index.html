@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+     User info
+{% endblock %}
+{% block content %}
+<div style="margin-top: 30px; ">
+    <h1 style="font-family: Georgia sans-serif; font-weight: 800;  ">Welcome to  Beyond 2 <br> Online quiz competition of SM2020 </h1>
+{% if user.is_authenticated %}
+    <div style="margin-top: 40px; ">
+    <h4 style="font-family: Georgia sans-serif; font-weight: 800;">Username: {{user.username}}</h4>
+    <h4 style="font-family: Georgia sans-serif; font-weight: 800;">Name: {{user.first_name}} {{user.last_name}}</h4>
+    <h4 style="font-family: Georgia sans-serif; font-weight: 800;">Email: {{user.email}}</h4>
+    </div>
+{% endif %}
+</div>
+{% endblock  %}

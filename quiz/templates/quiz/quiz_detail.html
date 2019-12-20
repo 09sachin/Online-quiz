@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %}
+{{ quiz.title }}
+{% endblock %}
+
+{% block content %}
+    <div style="background-color: white; margin-top: 50px; padding-left: 20px">
+<h2>{{ quiz.title }}</h2>
+<h3>{% trans "Category" %}: {{ quiz.category }}</h3>
+{% if quiz.single_attempt %}
+  <h4>{% trans "You will only get one attempt at this quiz" %}.</h4>
+{% endif %}
+<p>{{ quiz.description }}</p>
+    <h3>Rules of quiz : </h3>
+    <p>{{ quiz.rule1 }}</p>
+    <p>{{ quiz.rule2 }}</p>
+    <p>{{ quiz.rule3 }}</p>
+    <p>{{ quiz.rule4 }}</p>
+    <p>{{ quiz.rule5 }}</p>
+<p>
+ <button style=" margin-bottom: 30px; background-color: springgreen"> <a style="text-decoration: none" href="{% url 'quiz_question' quiz_name=quiz.url %}">
+	{% trans "Start quiz" %}
+  </a>
+     </button>
+</p>
+    </div>
+{% endblock %}
